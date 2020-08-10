@@ -1,0 +1,8 @@
+.header{
+    background-color: rgb(119, 58, 58) !important;
+    font-family: sans-serif;
+    
+}
+.nav-link ,.navbar-brand{
+    color: rgb(233, 224, 224) !important;
+}
