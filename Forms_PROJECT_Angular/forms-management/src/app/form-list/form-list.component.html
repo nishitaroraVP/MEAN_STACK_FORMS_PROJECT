@@ -5,17 +5,20 @@
 <div class="container">
   <div class="row">
     <div class="col-sm-12 col-md-6 col-lg-3">
-      <div *ngFor="let item of forms" class="card text-white bg-dark mb-3" style="max-width: 18rem;" >
-        <div class="card-header">Header</div>
-        <div class="card-body">
-          <h5 class="card-title">Dark card title</h5>
-          <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-        </div>
+      <div *ngFor="let form of forms">
+        <a [routerLink]="['/forms',form.slug,'view']">
+          <div  class="card text-black bg-light mb-3" style="max-width: 18rem;" >
+            <div class="card-header">Header</div>
+            <div class="card-body">
+              <h5 class="card-title">Dark card title</h5>
+              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+            </div>
+          </div>
+        </a>
+       
       </div>
-    </div>
   
-
-
+    </div>
   </div>
 </div>
     

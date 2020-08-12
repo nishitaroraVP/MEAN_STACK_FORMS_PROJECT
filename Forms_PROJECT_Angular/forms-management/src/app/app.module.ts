@@ -7,7 +7,9 @@ import { FormListComponent } from './form-list/form-list.component';
 import { FormEditComponent } from './form-list/form-edit/form-edit.component';
 import { FormComponent } from './form-list/form/form.component';
 import {HttpClientModule} from '@angular/common/http'
-import {FormsModule} from '@angular/forms'
+import {FormsModule} from '@angular/forms';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import {MatDialogModule} from '@angular/material/dialog';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +23,9 @@ import {FormsModule} from '@angular/forms'
     AppRoutingModule,
     HttpClientModule,
     ReactiveFormsModule,
-    FormsModule
+    FormsModule,
+    BrowserAnimationsModule,
+    MatDialogModule
   ],
   providers: [],
   bootstrap: [AppComponent]

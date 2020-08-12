@@ -2,13 +2,14 @@ const Form = require('../models/form');
 const Forms = require('../models/form');
 const Questions = require('../models/questions');
 const randomString = require('randomstring');
+const { response } = require('express');
 module.exports = {
     //Questions array in the form [{question:{statement:"what is your id?"}}] //
     createForm:async(req,res)=>{
         try {
             const data = req.body;
-           
-            const questions = await Questions.insertMany(data.questions);
+            console.log(data);
+            const questions = await Questions.insertMany(data);
             const question_ids = questions.map((question)=>question.id);
              const form = new Forms({
                 slug:randomString.generate(),
@@ -33,7 +34,6 @@ module.exports = {
                 throw ({statusCode:404,message:"MISSING_PARAMS"})
 
             }
-           
             conditions.slug  = data.slug;
             const form = await Form.findOne(conditions).populate('questions');
             if(!form){
@@ -53,6 +53,29 @@ module.exports = {
            res.status(200).json(form);
         } catch (error) {
             res.status(error.statusCode).json(error);
+        }
+    },
+    saveFormResponse:async(req,res)=>{
+        try {
+            const data = req.body;
+            let result;
+            if(!data.responses || !data.slug ){
+                throw {statusCode:404,message:"Missing_params"};
+            }
+            const form = await Form.findOne({slug:data.slug});
+            const questionIds = form.questions;
+            
+            data.responses.forEach(async (response,index)=>{
+              await Questions.updateOne({_id:questionIds[index]},{$push:{responses:response}})
+            })
+                
+            res.status(200).json({status:200,message:"Response saved"});
+           
+                
+           
+        } catch (error) {
+            console.log(error.message);
+            res.status(400).json(error);
         }
     }
     

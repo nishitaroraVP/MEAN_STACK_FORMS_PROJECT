@@ -1,1 +1,62 @@
-<p>form works!</p>
+<form #surveyForm="ngForm" (ngSubmit)="onSubmitSurveyForm(surveyForm)">
+  <div class="form-group">
+    <label for="email">Enter Your email</label>
+    <input class="form-control" placeholder="Enter Your email address" name="email" id="email" ngModel required >
+  </div>
+    <div *ngFor="let input of questions; let i = index">
+      <div *ngIf="input.type === 'paragraph'" class="form-group">
+        <label for="paragraph{{ i }}">{{ input.label }}</label>
+        <input
+          class="form-control"
+          type="text"
+          placeholder="Enter response"
+          name="question{{ i }}"
+          ngModel
+        />
+      </div>
+      <div class="form-group form-check" *ngIf="input.type === 'checkbox'">
+        <label for="checkboxQuestion{{ i }}">{{ input.label }}</label>
+  
+        <div *ngFor="let option of input.options; let j = index">
+          <input
+            type="checkbox"
+            class="form-check-input"
+            id="exampleCheck{{ j }}"
+            name="checkbox{{j}}"
+            value="{{option}}"
+            ngModel
+          />
+          <label class="form-check-label" for="exampleCheck{{ j }}">{{
+            option
+          }}</label>
+        </div>
+      </div>
+      <div *ngIf="input.type === 'radio'">
+        <label for="radioButtonQuestion">{{ input.label }}</label>
+        <div *ngFor="let option of input.options; let z = index">
+          <div class="radio">
+            <label for="radioButtonOption{{ z }}"
+              ><input
+                type="radio"
+                name="optradio"
+                id="radioButtonOption{{ z }}"
+                value="{{option}}"
+                ngModel
+              />{{ option }}</label
+            >
+          </div>
+        </div>
+      </div>
+      <div *ngIf="input.type === 'select'">
+        <label for="selectInputQuestion">{{ input.label }}</label>
+        <select class="form-control" id="exampleFormControlSelect{{ i }}">
+          <option selected>Select Type of Input</option>
+          <option *ngFor="let option of input.options" value="option">{{
+            option
+          }}</option>
+        </select>
+      </div>
+    </div>
+    <button type="submit" class="btn btn-primary" >Save</button>
+  </form>
+  
