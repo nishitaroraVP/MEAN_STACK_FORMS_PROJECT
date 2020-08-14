@@ -1,9 +1,10 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject,ViewChild, ElementRef } from '@angular/core';
 import {FormGroup, FormControl, Validators, FormArray,NgForm} from '@angular/forms';
 import {HttpClient} from '@angular/common/http';
 import {MatDialog, MatDialogRef,MAT_DIALOG_DATA} from '@angular/material/dialog';
 import { inject } from '@angular/core/testing';
-
+import {faPencilRuler,faTrashAlt} from '@fortawesome/free-solid-svg-icons'
+import {Router} from '@angular/router'
 @Component({
   selector: 'app-form-edit',
   templateUrl: './form-edit.component.html',
@@ -13,19 +14,29 @@ export class FormEditComponent implements OnInit {
   dynamicForm:FormGroup;
   surveyForm:NgForm;  
   inputTypes:string[] = ['paragraph','checkbox','radio','select']; 
-  dynamicInputs=[];                                              
-  constructor(private http:HttpClient,public dialog:MatDialog) { }
+  dynamicInputs=[];
+  faPencilRuler = faPencilRuler;      
+  formName:string;
+  FinalBody:any={};  
+  faTrashAlt = faTrashAlt ;                                     
+  constructor(private http:HttpClient,public dialog:MatDialog,private route:Router) { }
 
   ngOnInit(): void {
     this.dynamicForm = new FormGroup({
+      'name':new FormControl(null),
       'question':new FormControl(null,Validators.required),
       'type': new FormControl(null,Validators.required),
       'options':new FormArray([],Validators.required)
     })
     
+    
+    
   }
   onAddInputElement(){
-
+    if(this.dynamicInputs.length<1){
+      this.formName = this.dynamicForm.value.name;
+    }
+    
     this.dynamicInputs.push({label:this.dynamicForm.value.question,
       type:this.dynamicForm.value.type,
       options:this.dynamicForm.value?.options
@@ -38,22 +49,27 @@ export class FormEditComponent implements OnInit {
     (<FormArray>this.dynamicForm.get('options')).push(formControl);
   }
   onSubmitSurveyForm(surveyForm:NgForm){
-    this.http.post('http://localhost:3000/create/form',this.dynamicInputs).subscribe((response:any)=>{
-      console.log(response);
+    console.log(this.formName)
+    this.FinalBody.name=this.formName
+    this.FinalBody.dynamicInputs = this.dynamicInputs;
+    this.http.post('http://localhost:3000/create/form',this.FinalBody).subscribe((response:any)=>{
       let dialogRef = this.dialog.open(DialogElementsExampleDialog, {
         data:{
-          url:`http://localhost:4200/forms/${response.slug}/view` 
+          url:`http://localhost:4200/forms/${response.slug}/view/form` 
         },
         height: '400px',
         width: '600px',
       });
       dialogRef.afterClosed().subscribe(result => {
-        console.log(`Dialog result: ${result}`);
+        this.route.navigate(['/']);
       });
     })
     
     
     
+  }
+  onDeleteOption(index){
+    (<FormArray>this.dynamicForm.get('options')).removeAt(index);
   }
 
 }

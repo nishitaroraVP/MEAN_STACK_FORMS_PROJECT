@@ -1,7 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import {FormService} from '../form.service';
-import {ActivatedRoute} from '@angular/router'
-import { NgForm } from '@angular/forms';
+import {ActivatedRoute, Params} from '@angular/router';
 @Component({
   selector: 'app-form',
   templateUrl: './form.component.html',
@@ -9,30 +7,12 @@ import { NgForm } from '@angular/forms';
 })
 export class FormComponent implements OnInit {
   slug:string;
-  form:any;
-  questions:[]=[];
-  result:any={responses:[]};
-  constructor(private formService:FormService,private route:ActivatedRoute) { }
+  constructor(private activatedRoute:ActivatedRoute) { }
 
-  ngOnInit(): void {
-    this.route.params.subscribe((params)=>{
-      this.slug = params['slug']
-      this.formService.getFormBySlug(this.slug);
-      this.formService.formBySlug.subscribe((form)=>{
-        this.form = form;
-        this.questions = this.form.questions
-      })
+  ngOnInit(){
+    this.activatedRoute.params.subscribe((data:Params)=>{
+      this.slug=data['slug'];
     })
-    
-  }
-  onSubmitSurveyForm(surveyForm:NgForm){
-    this.result['slug'] = this.slug;
-    for (const key in  surveyForm.value ) {
-      if(key!=='email'){
-        this.result.responses.push({email:surveyForm.value.email,response:surveyForm.value[key]})
-      }
-    }
-   this.formService.SubmitResponse(this.result); 
   }
 
 }

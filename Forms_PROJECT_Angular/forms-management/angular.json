@@ -124,5 +124,8 @@
       }
     }
   },
-  "defaultProject": "forms-management"
+  "defaultProject": "forms-management",
+  "cli": {
+    "analytics": false
+  }
 }

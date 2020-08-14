@@ -4,7 +4,7 @@ const QuestionSchema = mongoose.Schema({
         type:String,
         options:[String],
         responses:[{response:String,email:String}],
-        form_id:mongoose.Types.ObjectId
+        
             
     
 })

@@ -1,6 +1,7 @@
 .header{
-    background-color: rgb(119, 58, 58) !important;
+    background-color: #093A3E !important;
     font-family: sans-serif;
+    height: 80px;
     
 }
 .nav-link ,.navbar-brand{

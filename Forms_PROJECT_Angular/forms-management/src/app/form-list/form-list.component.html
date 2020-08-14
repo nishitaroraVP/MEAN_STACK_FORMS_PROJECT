@@ -1,26 +1,27 @@
-
-  <a [routerLink]="['/forms/create']" routerLinkActive="router-link-active"  class="btn btn-info btn-lg">
-    <span class="glyphicon glyphicon-plus-sign"></span> Plus
-  </a>
 <div class="container">
   <div class="row">
-    <div class="col-sm-12 col-md-6 col-lg-3">
-      <div *ngFor="let form of forms">
-        <a [routerLink]="['/forms',form.slug,'view']">
-          <div  class="card text-black bg-light mb-3" style="max-width: 18rem;" >
-            <div class="card-header">Header</div>
-            <div class="card-body">
-              <h5 class="card-title">Dark card title</h5>
-              <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-            </div>
-          </div>
-        </a>
-       
+    
+      <a style="color: darkolivegreen;" [routerLink]="['/forms/create']" ><fa-icon [icon]="faPlusSquare" class="fa-10x"></fa-icon></a>
+
+ <ng-template ngFor let-form [ngForOf]="forms">
+   <a [routerLink]="[form.slug,'view','form']" style="display: inline-block; margin:10px;">
+      <div class="card text-white bg-success" style="max-width: 20rem;" >
+        <div class="card-header">{{form.name}}</div>
+        <div class="card-body">
+          <h5 class="card-title">No of Inputs = {{form.questions.length}}}</h5>
+         </div>
       </div>
-  
+    
+   </a>
+
+</ng-template>
     </div>
-  </div>
+  
 </div>
+
+
+
+
     
     
     

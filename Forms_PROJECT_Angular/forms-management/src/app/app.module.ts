@@ -10,12 +10,18 @@ import {HttpClientModule} from '@angular/common/http'
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+
+import { FormViewComponent } from './form-list/form/form-view/form-view.component';
+import { FormResponsesComponent } from './form-list/form/form-responses/form-responses.component';
 @NgModule({
   declarations: [
     AppComponent,
     FormListComponent,
     FormEditComponent,
     FormComponent,
+    FormViewComponent,
+    FormResponsesComponent,
    
   ],
   imports: [
@@ -25,7 +31,8 @@ import {MatDialogModule} from '@angular/material/dialog';
     ReactiveFormsModule,
     FormsModule,
     BrowserAnimationsModule,
-    MatDialogModule
+    MatDialogModule,
+    FontAwesomeModule
   ],
   providers: [],
   bootstrap: [AppComponent]
