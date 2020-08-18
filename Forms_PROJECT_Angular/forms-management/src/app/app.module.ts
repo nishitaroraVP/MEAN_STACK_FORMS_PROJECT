@@ -10,8 +10,9 @@ import {HttpClientModule} from '@angular/common/http'
 import {FormsModule} from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import {MatDialogModule} from '@angular/material/dialog';
+import {MatSnackBarModule} from '@angular/material/snack-bar'
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
-
+import {MatDatepickerModule} from '@angular/material/datepicker'
 import { FormViewComponent } from './form-list/form/form-view/form-view.component';
 import { FormResponsesComponent } from './form-list/form/form-responses/form-responses.component';
 @NgModule({
@@ -32,7 +33,9 @@ import { FormResponsesComponent } from './form-list/form/form-responses/form-res
     FormsModule,
     BrowserAnimationsModule,
     MatDialogModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    MatSnackBarModule,
+    MatDatepickerModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

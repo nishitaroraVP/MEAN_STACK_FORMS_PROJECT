@@ -22,6 +22,7 @@ export class FormViewComponent implements OnInit {
       this.formService.formBySlug.subscribe((form)=>{
         this.form = form;
         this.questions = this.form.questions;
+        console.log(this.form);
       })
     })
     
