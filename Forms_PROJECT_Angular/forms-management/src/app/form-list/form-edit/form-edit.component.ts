@@ -29,7 +29,7 @@ export class FormEditComponent implements OnInit {
     this.dynamicForm = new FormGroup({
       'name': new FormControl(null),
       'question': new FormControl(null, Validators.required),
-      'type': new FormControl(null, Validators.required),
+      'type': new FormControl(null, [Validators.required,Validators.]),
       'options': new FormArray([], Validators.required)
     })
   }
@@ -64,7 +64,8 @@ export class FormEditComponent implements OnInit {
     this.http.post('http://localhost:3000/create/form', this.FinalBody, { observe: 'body' }).subscribe((response: any) => {
       let dialogRef = this.dialog.open(DialogElementsExampleDialog, {
         data: {
-          url: `http://localhost:4200/forms/${response.slug}/view/form`
+          url: window.location.origin+`/forms/${response.slug}/view/form`
+          
         },
         height: '400px',
         width: '600px',

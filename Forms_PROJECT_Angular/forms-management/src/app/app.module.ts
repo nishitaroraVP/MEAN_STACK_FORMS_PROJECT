@@ -15,6 +15,9 @@ import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import {MatDatepickerModule} from '@angular/material/datepicker'
 import { FormViewComponent } from './form-list/form/form-view/form-view.component';
 import { FormResponsesComponent } from './form-list/form/form-responses/form-responses.component';
+import {MatNativeDateModule} from '@angular/material/core'
+import {MatFormFieldModule} from '@angular/material/form-field';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -36,6 +39,8 @@ import { FormResponsesComponent } from './form-list/form/form-responses/form-res
     FontAwesomeModule,
     MatSnackBarModule,
     MatDatepickerModule,
+    MatNativeDateModule,
+    MatFormFieldModule
   ],
   providers: [],
   bootstrap: [AppComponent]

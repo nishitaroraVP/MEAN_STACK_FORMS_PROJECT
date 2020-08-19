@@ -66,6 +66,7 @@ module.exports = {
         try {
             const data = req.body;
             let email;
+            console.log(data);
             if(!data.responses || !data.slug ){
                 throw {statusCode:404,message:"Missing_params"};
             }

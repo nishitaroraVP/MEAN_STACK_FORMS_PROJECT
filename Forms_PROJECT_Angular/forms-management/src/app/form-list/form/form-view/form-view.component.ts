@@ -28,7 +28,7 @@ export class FormViewComponent implements OnInit {
     
   }
   onSubmitSurveyForm(surveyForm:NgForm){
-    console.log(surveyForm);
+    console.log(surveyForm.value);
     this.result['slug'] = this.slug;
     for (const key in  surveyForm.value ) {
       if(key!=='email'){

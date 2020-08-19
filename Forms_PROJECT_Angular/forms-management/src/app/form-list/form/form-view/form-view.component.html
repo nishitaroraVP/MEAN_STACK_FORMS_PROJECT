@@ -18,10 +18,12 @@
         </div>
         <div class="form-group" *ngIf="input.type === 'date'">
           <label for="checkboxQuestion{{ i }}">{{ input.label }}</label>
-    
-          <input matInput [matDatepicker]="picker">
-          <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-          <mat-datepicker #picker></mat-datepicker>
+          <span>
+            <input class="form-control" matInput [matDatepicker]="picker">
+            <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+            <mat-datepicker #picker></mat-datepicker>
+          </span>
+         
         </div>
         <div *ngIf="input.type === 'radio'">
           <label for="radioButtonQuestion">{{ input.label }}</label>
